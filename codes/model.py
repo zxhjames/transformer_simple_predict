@@ -25,12 +25,13 @@ class PositionalEncoding(nn.Module):
 
 
 # %%
-
+'''
+传统的transformer结构
+'''
 class TransAm(nn.Module):
     def __init__(self, feature_size=10, num_layers=3, dropout=0.1):
         super(TransAm, self).__init__()
         self.model_type = 'Transformer'
-
         self.src_mask = None
         self.pos_encoder = PositionalEncoding(feature_size)
         self.encoder_layer = nn.TransformerEncoderLayer(d_model=feature_size, nhead=10, dropout=dropout)

@@ -86,7 +86,7 @@ class TransAm(nn.Module):
 
 import pandas as pd
 from datetime import date
-debug = False
+debug = True
 data_ = pd.read_excel('../data/LD_20142.xlsx', 'Sheet1', parse_dates=["date"],nrows= 1000 if debug else None)
 
 

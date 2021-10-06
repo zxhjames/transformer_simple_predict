@@ -11,17 +11,17 @@ def train(train_data,output_window,epoch,model,scheduler,optimizer,batch_size,cr
     total_loss = 0.
     start_time = time.time()
 
+    # 循环选取batch_size
     for batch, i in enumerate(range(0, len(train_data) - 1, batch_size)):
         data, targets = get_batch(train_data, i, batch_size,input_window)
         optimizer.zero_grad()
         output = model(data)
-
         if calculate_loss_over_all_values:
             loss = criterion(output, targets)
         else:
             loss = criterion(output[-output_window:], targets[-output_window:])
-
         loss.backward()
+        # 梯度裁剪 防止梯度爆炸
         torch.nn.utils.clip_grad_norm_(model.parameters(), 0.5)
         optimizer.step()
 
@@ -102,7 +102,7 @@ def predict_future(eval_model, data_source, steps, epoch, scaler,input_window,ou
     pyplot.plot(data[:input_window], color="blue")
     pyplot.grid(True, which='both')
     pyplot.axhline(y=0, color='k')
-    pyplot.savefig('graph/transformer-future%d.png' % epoch)
+    pyplot.savefig('../assets/transformer-future%d.png' % epoch)
     pyplot.close()
 
 
@@ -167,7 +167,8 @@ def plot(eval_model, data_source, epoch, scaler,calculate_loss_over_all_values,c
         pyplot.ylim(ymin, ymax)
         pyplot.xlabel("Periods")
         pyplot.ylabel("Y")
-        pyplot.show()
+        #pyplot.show()
+        pyplot.savefig('../assets/transformer-future%d.png' % m)
         pyplot.close()
     return total_loss / i
 
