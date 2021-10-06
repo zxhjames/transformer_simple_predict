@@ -1,3 +1,11 @@
+'''
+Author: your name
+Date: 2021-10-04 15:32:19
+LastEditTime: 2021-10-06 08:46:49
+LastEditors: your name
+Description: In User Settings Edit
+FilePath: \project_demo\研二\实验basemodel\transformer_ETL\codes\main.py
+'''
 import torch
 import torch.nn as nn
 import numpy as np
@@ -20,7 +28,7 @@ np.random.seed(0)
 calculate_loss_over_all_values = False
 
 debug = True
-data_ = pd.read_excel('../data/LD_20142.xlsx', 'Sheet1', parse_dates=["date"],nrows= 1000 if debug else None)
+data_ = pd.read_excel('../data/LD_20142.xlsx', 'Sheet1', parse_dates=["date"],nrows= 10000 if debug else None)
 
 input_window = 100
 output_window = 5
