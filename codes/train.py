@@ -13,6 +13,7 @@ def train(train_data,output_window,epoch,model,scheduler,optimizer,batch_size,cr
 
     # 循环选取batch_size
     for batch, i in enumerate(range(0, len(train_data) - 1, batch_size)):
+        # 获取数据和标签
         data, targets = get_batch(train_data, i, batch_size,input_window)
         optimizer.zero_grad()
         output = model(data)

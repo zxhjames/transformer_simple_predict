@@ -13,7 +13,9 @@ from train import *
 
 torch.manual_seed(0)
 np.random.seed(0)
-
+'''
+teacher forcing旨在防止transformer在解码层出现错误累积的情况
+'''
 # TODO This concept is also called teacher forceing.
 # The flag decides if the loss will be calculted over all
 # or just the predicted values.
@@ -68,7 +70,6 @@ best_model = None
 for epoch in range(1, epochs + 1):
     epoch_start_time = time.time()
     train(train_data,output_window,epoch,model,scheduler,optimizer,batch_size,criterion,calculate_loss_over_all_values,input_window)
-
     if (epoch % 1 is 0):
         val_loss = plot(model, val_data,  epoch, scaler,calculate_loss_over_all_values,criterion,output_window,input_window)
         # eval_model, data_source, steps, epoch, scaler,input_window,output_window
